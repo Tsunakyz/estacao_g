@@ -13,18 +13,6 @@ const db = mysql.createPool({
 app.use(cors())
 app.use(express.json())
 
-app.post('/register', (req, res) => {
-    const {name, cost, category} = req.body
-
-    const sql = `INSERT INTO games (name, cost, category) VALUES ('${name}','${cost}','${category}')`
-
-    db.query(sql, (err, result) => {
-        console.log(result)
-    })
-
-    console.log(name, cost, category)
-})
-
 // -- START AUTHORS -- \\
 
 app.get('/getAuthors', (req, res) => {
@@ -140,7 +128,6 @@ app.get('/getNoticeById', (req, res) => {
 })
 
 app.delete('/deleteNotice', (req, res) => {
-    console.log(req.body)
     const { id } = req.body
     
     const sql = `DELETE FROM notices WHERE notices.id = ${id}`
@@ -166,8 +153,6 @@ app.put('/updateNotice', (req, res) => {
             id = ${id}
     `
     db.query(sql, (err, result) => {
-        console.log(err)
-        console.log(result)
         res.json(result)
     })
 })
